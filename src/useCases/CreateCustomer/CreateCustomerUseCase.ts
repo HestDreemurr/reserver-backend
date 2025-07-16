@@ -1,6 +1,7 @@
 import { ICustomersRepository } from "@/repositories/ICustomersRepository";
 import { ICreateCustomerRequestDTO, ICreateCustomerResponseDTO } from "./CreateCustomerDTO";
 import { Customer } from "@/entities/Customer";
+import { CustomerSchema } from "@/libs/zod";
 import { sign } from "@/libs/jwt";
 
 export class CreateCustomerUseCase {
@@ -13,12 +14,18 @@ export class CreateCustomerUseCase {
     email,
     password
   }: ICreateCustomerRequestDTO): ICreateCustomerResponseDTO {
-    const customer = new Customer({
+    const { success, error, data } = CustomerSchema.safeParse({
       name,
       email,
       password,
       role: "customer"
     });
+    
+    if (!success) {
+      throw new Error(error.issues[0].message);
+    }
+    
+    const customer = new Customer(data);
     
     const customerAlreadyExists = await this.customersRepository.findByEmail(customer.email);
     

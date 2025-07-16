@@ -11,16 +11,9 @@ export class Customer {
   public role: "customer" | "admin";
   
   constructor(props: Omit<Customer, "id">, id?: string) {
-    this.id = id ?? randomUUID();
-    
     Object.assign(this, props);
     
-    const { success, error } = CustomerSchema.safeParse(this);
-    
-    if (!success) {
-      throw new Error(error.issues[0].message);
-    }
-    
+    this.id = id ?? randomUUID();
     this.password = hash(this.password);
   }
 }

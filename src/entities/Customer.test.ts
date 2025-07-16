@@ -11,15 +11,6 @@ describe("Customer Entity", () => {
     });
     
     expect(customer).toBeInstanceOf(Customer);
-    console.log(`Customer object: ${JSON.stringify(customer, null, 2)}`);
-  });
-  
-  test("should not be able to create a invalid customer entity", () => {
-    expect(() => new Customer({
-      name: "Me",
-      email: "invalidemail",
-      password: "12345",
-      role: "unknown"
-    })).toThrow();
+    expect(customer.name).toBe("Hest");
   });
 });

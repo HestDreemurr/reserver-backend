@@ -21,4 +21,30 @@ describe("Create Customer", () => {
       password: "shadow123"
     })).rejects.toThrow();
   });
+  
+  test("should not create a user with invalid credentials", async () => {
+    await expect(createCustomerUseCase.execute({
+      email: "blabla@gmail.com",
+      password: "bleble123"
+    })).rejects.toThrow("The name field is missing.");
+    
+    await expect(createCustomerUseCase.execute({
+      name: 123
+    })).rejects.toThrow("Invalid name.");
+    
+    await expect(createCustomerUseCase.execute({
+      name: "He"
+    })).rejects.toThrow("The name must be at least 3 characters long.");
+    
+    await expect(createCustomerUseCase.execute({
+      name: "Hest",
+      email: "hestbut"
+    })).rejects.toThrow("Invalid email.");
+    
+    await expect(createCustomerUseCase.execute({
+      name: "Hest",
+      email: "hest@gmail.com",
+      password: "123"
+    })).rejects.toThrow("The password must be at least 6 characters long.");
+  });
 });
