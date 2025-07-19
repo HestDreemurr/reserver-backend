@@ -7,20 +7,20 @@ export class CreateCustomerController {
   ) {}
   
   async handle(request: Request, response: Response) {
+    if (!request.body) {
+      return response.status(400).json({
+        message: "The request body is missing."
+      });
+    }
+    
     const { name, email, password } = request.body;
     
-    try {
-      const result = await this.createCustomerUseCase.execute({
+    const result = await this.createCustomerUseCase.execute({
         name,
         email,
         password
       });
       
-      return response.status(201).json(result);
-    } catch (err) {
-      return response.status(400).json({
-        message: err.message ?? "Erro inesperado"
-      });
-    }
+    return response.status(201).json(result);
   }
 }

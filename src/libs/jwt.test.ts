@@ -2,16 +2,20 @@ import { describe, test, expect } from "vitest";
 import { sign, decrypt } from "./jwt";
 
 describe("JWT Tokens", () => {
+  const token = sign({
+    id: "123",
+    role: "admin"
+  });
+  
   test("sign a jwt", () => {
-    const token = sign("123");
-    
     expect(token).toBeDefined();
   });
   
   test("verify a valid token", () => {
-    const payload = decrypt("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxMjMiLCJpYXQiOjE3NTI0NDQyNDAsImV4cCI6MTc1MzA0OTA0MH0.arySalCEW2LVcyPgIyPjwwCKBIW_nTiN_tS3VhTL8kw");
+    const payload = decrypt(token);
     
-    expect(payload.userId).toBe("123");
+    expect(payload.id).toBe("123");
+    expect(payload.role).toBe("admin");
   });
   
   test("verify a invalid token", () => {

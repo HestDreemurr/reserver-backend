@@ -1,6 +1,7 @@
 import { ICustomersRepository } from "@/repositories/ICustomersRepository";
 import { IAuthenticateCustomerRequestDTO, IAuthenticateCustomerResponseDTO } from "./AuthenticateCustomerDTO";
 import { AuthCustomerSchema } from "@/libs/zod";
+import { AppError } from "@/app-error";
 import { compare } from "bcryptjs";
 import { sign } from "@/libs/jwt";
 
@@ -19,22 +20,26 @@ export class AuthenticateCustomerUseCase {
     });
     
     if (!success) {
-      throw new Error(error.issues[0].message);
+      throw new AppError(error.issues[0].message);
     }
     
     const customer = await this.customersRepository.findByEmail(email);
     
     if (!customer) {
-      throw new Error("The customer don't exists.");
+      throw new AppError("The customer don't exists.", 404);
     }
     
     const isValidPassword = await compare(password, customer.password);
     
     if (!isValidPassword) {
-      throw new Error("Invalid credentials.");
+      throw new Error("Invalid credentials.", 401);
     }
     
-    const token = sign(customer.id);
+    const token = sign({
+      id: customer.id,
+      role: customer.role
+    });
+    
     return { token };
   }
 }

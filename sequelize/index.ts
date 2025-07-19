@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { Sequelize, DataTypes } from "sequelize";
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
@@ -17,4 +16,18 @@ const Customers = sequelize.define("customers", {
   role: DataTypes.TEXT
 }, { timestamps: false });
 
-export { sequelize, Customers };
+const Tables = sequelize.define("tables", {
+  id: {
+    type: DataTypes.UUID,
+    primaryKey: true
+  },
+  name: DataTypes.TEXT,
+  capacity: DataTypes.INTEGER,
+  status: DataTypes.TEXT
+}, { timestamps: false });
+
+export { 
+  sequelize, 
+  Customers,
+  Tables
+};

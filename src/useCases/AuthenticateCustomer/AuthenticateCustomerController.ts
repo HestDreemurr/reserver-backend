@@ -10,19 +10,19 @@ export class AuthenticateCustomerController {
     request: Request,
     response: Response
   ) {
-    const { email, password } = request.body;
-    
-    try {
-      const result = await this.authenticateCustomerUseCase.execute({
-        email,
-        password
-      });
-      
-      return response.status(200).json(result);
-    } catch (err) {
+    if (!request.body) {
       return response.status(400).json({
-        message: err.message ?? "Erro inesperado."
+        message: "The request body is missing."
       });
     }
+    
+    const { email, password } = request.body;
+    
+    const result = await this.authenticateCustomerUseCase.execute({
+      email,
+      password
+    });
+    
+    return response.status(200).json(result);
   }
 }

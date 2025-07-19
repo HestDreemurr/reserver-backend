@@ -3,8 +3,11 @@ import jwt from "jsonwebtoken";
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
-export function sign(id: string) {
-  const token = jwt.sign({ userId: id }, secretKey, { expiresIn: "7d" });
+export function sign(body: {
+  id: string,
+  role: "customer" | "admin"
+}) {
+  const token = jwt.sign(body, secretKey, { expiresIn: "7d" });
   return token;
 }
 

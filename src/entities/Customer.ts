@@ -1,5 +1,4 @@
 import { randomUUID } from "crypto";
-import { CustomerSchema } from "@/libs/zod";
 import { hash } from "@/libs/bcrypt";
 
 export class Customer {

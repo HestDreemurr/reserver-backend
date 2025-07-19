@@ -18,3 +18,13 @@ export const AuthCustomerSchema = z.object({
   email: emailSchema,
   password: passwordSchema
 });
+
+export const TableSchema = z.object({
+  name: z.string({ error: (iss) => iss.input === undefined ? "The name field is missing." : "Invalid name." }),
+  
+  capacity: z.number({ error: (iss) => iss.input === undefined ? "The capacity field is missing" : "Invalid capacity." })
+    .min(1, "The capacity must be a number between 1 and 10.")
+    .max(10, "The capacity must be a number between 1 and 10."),
+  
+  status: z.literal(["available", "reserved", "inactive"])
+});

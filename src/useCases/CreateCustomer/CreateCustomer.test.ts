@@ -19,7 +19,7 @@ describe("Create Customer", () => {
       name: "Shadow",
       email: "shadow@gmail.com",
       password: "shadow123"
-    })).rejects.toThrow();
+    })).rejects.toThrow("The customer already exists.");
   });
   
   test("should not create a user with invalid credentials", async () => {
