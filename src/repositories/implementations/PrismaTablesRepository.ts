@@ -1,14 +1,15 @@
 import { Table } from "@/entities/Table";
 import { ITablesRepository } from "../ITablesRepository";
-import { Tables } from "#sequelize";
+import { prisma } from "./prisma";
 
-export class SequelizeTablesRepository implements ITablesRepository {
+export class PrismaTablesRepository implements ITablesRepository {
   async save(table: Table): Promise<void> {
-    await Tables.create(table);
+    await prisma.table.create({ data: table });
   }
   
   async list(): Promise<Table[]> {
-    const data = Tables.findAll();
+    const data = await prisma.table.findMany();
+    
     return data;
   }
 }

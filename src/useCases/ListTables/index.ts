@@ -1,8 +1,8 @@
-import { SequelizeTablesRepository } from "@/repositories/implementations/SequelizeTablesRepository";
+import { PrismaTablesRepository } from "@/repositories/implementations/PrismaTablesRepository";
 import { ListTablesUseCase } from "./ListTablesUseCase";
 import { ListTablesController } from "./ListTablesController";
 
-const sequelizeTablesRepository = new SequelizeTablesRepository();
+const sequelizeTablesRepository = new PrismaTablesRepository();
 
 const listTablesUseCase = new ListTablesUseCase(sequelizeTablesRepository);
 

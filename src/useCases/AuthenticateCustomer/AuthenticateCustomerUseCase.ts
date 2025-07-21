@@ -32,7 +32,7 @@ export class AuthenticateCustomerUseCase {
     const isValidPassword = await compare(password, customer.password);
     
     if (!isValidPassword) {
-      throw new Error("Invalid credentials.", 401);
+      throw new AppError("Invalid credentials.", 401);
     }
     
     const token = sign({

@@ -19,7 +19,7 @@ export class CreateCustomerUseCase {
       name,
       email,
       password,
-      role: "admin"
+      role: "customer"
     });
     
     if (!success) {

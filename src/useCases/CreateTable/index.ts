@@ -1,8 +1,8 @@
-import { SequelizeTablesRepository } from "@/repositories/implementations/SequelizeTablesRepository";
+import { PrismaTablesRepository } from "@/repositories/implementations/PrismaTablesRepository";
 import { CreateTableUseCase } from "./CreateTableUseCase";
 import { CreateTableController } from "./CreateTableController";
 
-const sequelizeTablesRepository = new SequelizeTablesRepository();
+const sequelizeTablesRepository = new PrismaTablesRepository();
 
 const createTableUseCase = new CreateTableUseCase(sequelizeTablesRepository);
 

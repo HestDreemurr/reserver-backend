@@ -1,8 +1,8 @@
-import { SequelizeCustomersRepository } from "@/repositories/implementations/SequelizeCustomersRepository";
+import { PrismaCustomersRepository } from "@/repositories/implementations/PrismaCustomersRepository";
 import { AuthenticateCustomerUseCase } from "./AuthenticateCustomerUseCase";
 import { AuthenticateCustomerController } from "./AuthenticateCustomerController";
 
-const sequelizeCustomersRepository = new SequelizeCustomersRepository();
+const sequelizeCustomersRepository = new PrismaCustomersRepository();
 
 const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(sequelizeCustomersRepository);
 
