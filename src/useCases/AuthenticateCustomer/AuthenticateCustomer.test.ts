@@ -3,7 +3,7 @@ import { InMemoryCustomersRepository } from "@/repositories/in-memory/InMemoryCu
 import { AuthenticateCustomerUseCase } from "./AuthenticateCustomerUseCase";
 import { Customer } from "@/entities/Customer";
 
-describe("Authenticate User", () => {
+describe("Authenticate User", async () => {
   const inMemoryCustomersRepository = new InMemoryCustomersRepository();
   
   const customer = new Customer({
@@ -13,7 +13,7 @@ describe("Authenticate User", () => {
     role: "customer"
   });
   
-  inMemoryCustomersRepository.save(customer);
+  await inMemoryCustomersRepository.save(customer);
   
   const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(inMemoryCustomersRepository);
   
@@ -39,6 +39,8 @@ describe("Authenticate User", () => {
   });
   
   test("should not be able to authenticate a customer with invalid credentials", async () => {
+    await expect(authenticateCustomerUseCase.execute(undefined)).rejects.toThrow("The request body is missing.");
+    
     await expect(authenticateCustomerUseCase.execute({
       email: "sla@gmail.com"
     })).rejects.toThrow("The password field is missing.");

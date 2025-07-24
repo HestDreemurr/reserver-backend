@@ -7,19 +7,9 @@ export class CreateCustomerController {
   ) {}
   
   async handle(request: Request, response: Response) {
-    if (!request.body) {
-      return response.status(400).json({
-        message: "The request body is missing."
-      });
-    }
+    const data = request.body;
     
-    const { name, email, password } = request.body;
-    
-    const result = await this.createCustomerUseCase.execute({
-        name,
-        email,
-        password
-      });
+    const result = await this.createCustomerUseCase.execute(data);
       
     return response.status(201).json(result);
   }

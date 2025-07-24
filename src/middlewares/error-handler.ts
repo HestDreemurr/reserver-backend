@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { AppError } from "@/app-error";
+import { ZodError } from "zod";
 
 export async function errorHandler(
   error: Error,
@@ -10,6 +11,12 @@ export async function errorHandler(
   if (error instanceof AppError) {
     return response.status(error.status).json({
       message: error.message
+    });
+  }
+  
+  if (error instanceof ZodError) {
+    return response.status(400).json({
+      message: error.issues[0].message
     });
   }
   

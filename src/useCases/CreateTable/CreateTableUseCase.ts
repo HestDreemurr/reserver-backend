@@ -9,19 +9,8 @@ export class CreateTableUseCase {
     private tablesRepository: ITablesRepository
   ) {}
   
-  async execute({
-    name,
-    capacity
-  }: ICreateTableRequestDTO) {
-    const { data, success, error } = TableSchema.safeParse({
-      name,
-      capacity,
-      status: "available"
-    });
-    
-    if (!success) {
-      throw new AppError(error.issues[0].message);
-    }
+  async execute(request: ICreateTableRequestDTO) {
+    const data = TableSchema.parse(request);
     
     const table = new Table(data);
     

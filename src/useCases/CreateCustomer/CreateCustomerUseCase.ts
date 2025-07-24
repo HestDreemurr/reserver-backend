@@ -1,8 +1,8 @@
 import { ICustomersRepository } from "@/repositories/ICustomersRepository";
 import { ICreateCustomerRequestDTO, ICreateCustomerResponseDTO } from "./CreateCustomerDTO";
 import { Customer } from "@/entities/Customer";
-import { AppError } from "@/app-error";
 import { CustomerSchema } from "@/libs/zod";
+import { AppError } from "@/app-error";
 import { sign } from "@/libs/jwt";
 
 export class CreateCustomerUseCase {
@@ -10,21 +10,8 @@ export class CreateCustomerUseCase {
     private customersRepository: ICustomersRepository
   ) {}
   
-  async execute({
-    name,
-    email,
-    password
-  }: ICreateCustomerRequestDTO): ICreateCustomerResponseDTO {
-    const { success, error, data } = CustomerSchema.safeParse({
-      name,
-      email,
-      password,
-      role: "customer"
-    });
-    
-    if (!success) {
-      throw new AppError(error.issues[0].message);
-    }
+  async execute(request: ICreateCustomerRequestDTO): ICreateCustomerResponseDTO {
+    const data = CustomerSchema.parse(request);
     
     const customer = new Customer(data);
     

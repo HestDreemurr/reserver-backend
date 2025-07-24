@@ -10,18 +10,9 @@ export class CreateTableController {
     request: Request,
     response: Response
   ) {
-    if (!request.body) {
-      return response.status(400).json({
-        message: "The request body is missing."
-      });
-    }
+    const data = request.body;
     
-    const { name, capacity } = request.body;
-    
-    await this.createTableUseCase.execute({
-      name,
-      capacity
-    });
+    await this.createTableUseCase.execute(data);
     
     return response.status(201).send();
   }

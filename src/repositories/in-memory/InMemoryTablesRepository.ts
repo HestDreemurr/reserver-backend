@@ -19,4 +19,9 @@ export class InMemoryTablesRepository implements ITablesRepository {
       }
     });
   }
+  
+  async findById(id: string): Promise<Table> {
+    const data = this.tables.find(table => table.id === id);
+    return data;
+  }
 }

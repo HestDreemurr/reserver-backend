@@ -23,6 +23,8 @@ describe("Create Customer", () => {
   });
   
   test("should not create a user with invalid credentials", async () => {
+    await expect(createCustomerUseCase.execute(undefined)).rejects.toThrow("The request body is missing.");
+    
     await expect(createCustomerUseCase.execute({
       email: "blabla@gmail.com",
       password: "bleble123"

@@ -15,6 +15,8 @@ describe("Create Table", () => {
   });
   
   test("should not create a table with invalid credentials", async () => {
+    await expect(createTableUseCase.execute(undefined)).rejects.toThrow("The request body is missing.");
+    
     await expect(createTableUseCase.execute({
       capacity: 3
     })).rejects.toThrow("The name field is missing.");

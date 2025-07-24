@@ -7,7 +7,7 @@ export class Customer {
   public name: string;
   public email: string;
   public password: string;
-  public role: "customer" | "admin";
+  public role?: "customer" | "admin";
   
   constructor(props: Omit<Customer, "id">, id?: string) {
     Object.assign(this, props);

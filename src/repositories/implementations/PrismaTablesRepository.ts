@@ -12,4 +12,23 @@ export class PrismaTablesRepository implements ITablesRepository {
     
     return data;
   }
+  
+  async update(id: string, changes: Partial<Table>): Promise<void> {
+    await prisma.table.update({
+      data: changes,
+      where: {
+        id
+      }
+    });
+  }
+  
+  async findById(id: string): Promise<Table> {
+    const data = await prisma.table.findUnique({
+      where: {
+        id
+      }
+    });
+    
+    return data;
+  }
 }

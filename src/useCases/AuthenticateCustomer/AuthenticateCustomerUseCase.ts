@@ -10,26 +10,16 @@ export class AuthenticateCustomerUseCase {
     private customersRepository: ICustomersRepository
   ) {}
   
-  async execute({
-    email,
-    password
-  }: IAuthenticateCustomerRequestDTO): IAuthenticateCustomerResponseDTO {
-    const { success, error } = AuthCustomerSchema.safeParse({
-      email,
-      password
-    });
+  async execute(request: IAuthenticateCustomerRequestDTO): IAuthenticateCustomerResponseDTO {
+    const data = AuthCustomerSchema.parse(request);
     
-    if (!success) {
-      throw new AppError(error.issues[0].message);
-    }
-    
-    const customer = await this.customersRepository.findByEmail(email);
+    const customer = await this.customersRepository.findByEmail(data.email);
     
     if (!customer) {
       throw new AppError("The customer don't exists.", 404);
     }
     
-    const isValidPassword = await compare(password, customer.password);
+    const isValidPassword = await compare(data.password, customer.password);
     
     if (!isValidPassword) {
       throw new AppError("Invalid credentials.", 401);

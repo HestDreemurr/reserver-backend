@@ -12,7 +12,7 @@ model Customer {
   name String
   email String @unique
   password String
-  role String
+  role String @default("customer")
   
   @@map("customers")
 }
@@ -21,7 +21,7 @@ model Table {
   id String @id @default(uuid())
   name String
   capacity Int
-  status String
+  status String @default("available")
   
   @@map("tables")
 }

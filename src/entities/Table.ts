@@ -5,7 +5,7 @@ export class Table {
   
   public name: string;
   public capacity: number;
-  public status: "available" | "reserved" | "inactive";
+  public status?: "available" | "reserved" | "inactive";
   
   constructor(props: Omit<Table, "id">, id?: string) {
     Object.assign(this, props);

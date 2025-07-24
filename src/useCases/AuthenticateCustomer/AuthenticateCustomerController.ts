@@ -1,5 +1,6 @@
 import { AuthenticateCustomerUseCase } from "./AuthenticateCustomerUseCase";
 import { Request, Response } from "express";
+import { AuthCustomerSchema } from "@/libs/zod";
 
 export class AuthenticateCustomerController {
   constructor(
@@ -10,18 +11,9 @@ export class AuthenticateCustomerController {
     request: Request,
     response: Response
   ) {
-    if (!request.body) {
-      return response.status(400).json({
-        message: "The request body is missing."
-      });
-    }
+    const data = request.body;
     
-    const { email, password } = request.body;
-    
-    const result = await this.authenticateCustomerUseCase.execute({
-      email,
-      password
-    });
+    const result = await this.authenticateCustomerUseCase.execute(data);
     
     return response.status(200).json(result);
   }
