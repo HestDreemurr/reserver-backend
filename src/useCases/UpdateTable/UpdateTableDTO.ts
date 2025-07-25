@@ -3,6 +3,6 @@ export interface IUpdateTableRequestDTO {
   changes: {
     name?: string;
     capacity?: number;
-    status?: "available" | "reserved" | "inactive"
+    status?: "available" | "reserved" | "inactive";
   };
 }

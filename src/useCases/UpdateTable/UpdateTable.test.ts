@@ -35,5 +35,15 @@ describe("Update Table", async () => {
       id: table.id,
       changes: { status: "slasla" }
     })).rejects.toThrow("Invalid table status.");
+    
+    await expect(updateTableUseCase.execute({
+      id: table.id,
+      changes: { capacity: 11 }
+    })).rejects.toThrow("The capacity must be a number between 1 and 10.");
+    
+    await expect(updateTableUseCase.execute({
+      id: table.id,
+      changes: undefined
+    })).rejects.toThrow("The request body is missing.");
   });
 });
