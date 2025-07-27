@@ -1,9 +1,9 @@
 import { ICustomersRepository } from "@/repositories/ICustomersRepository";
 import { IAuthenticateCustomerRequestDTO, IAuthenticateCustomerResponseDTO } from "./AuthenticateCustomerDTO";
-import { AuthCustomerSchema } from "@/libs/zod";
-import { AppError } from "@/app-error";
+import { AuthCustomerSchema } from "@/lib/schemas";
+import { AppError } from "@/http/app-error";
 import { compare } from "bcryptjs";
-import { sign } from "@/libs/jwt";
+import { sign } from "@/lib/jwt";
 
 export class AuthenticateCustomerUseCase {
   constructor(

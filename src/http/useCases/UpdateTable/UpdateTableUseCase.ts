@@ -1,7 +1,7 @@
 import { ITablesRepository } from "@/repositories/ITablesRepository";
 import { IUpdateTableRequestDTO } from "./UpdateTableDTO";
-import { UpdateTableSchema } from "@/libs/zod";
-import { AppError } from "@/app-error";
+import { UpdateTableSchema } from "@/lib/schemas";
+import { AppError } from "@/http/app-error";
 
 export class UpdateTableUseCase {
   constructor(

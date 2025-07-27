@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "@/app-error";
+import { AppError } from "@/http/app-error";
 import { ZodError } from "zod";
 
 export async function errorHandler(

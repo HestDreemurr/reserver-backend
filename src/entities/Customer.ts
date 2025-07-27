@@ -1,5 +1,5 @@
 import { randomUUID } from "crypto";
-import { hash } from "@/libs/bcrypt";
+import { hash } from "@/lib/bcrypt";
 
 export class Customer {
   public readonly id: string;

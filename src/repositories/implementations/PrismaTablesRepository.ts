@@ -1,6 +1,6 @@
 import { Table } from "@/entities/Table";
 import { ITablesRepository } from "../ITablesRepository";
-import { prisma } from "./prisma";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaTablesRepository implements ITablesRepository {
   async save(table: Table): Promise<void> {
@@ -30,5 +30,13 @@ export class PrismaTablesRepository implements ITablesRepository {
     });
     
     return data;
+  }
+  
+  async delete(id: string): Promise<void> {
+    await prisma.table.delete({
+      where: {
+        id
+      }
+    });
   }
 }

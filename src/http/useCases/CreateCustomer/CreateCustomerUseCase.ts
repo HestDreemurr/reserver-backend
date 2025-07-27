@@ -1,9 +1,9 @@
 import { ICustomersRepository } from "@/repositories/ICustomersRepository";
 import { ICreateCustomerRequestDTO, ICreateCustomerResponseDTO } from "./CreateCustomerDTO";
 import { Customer } from "@/entities/Customer";
-import { CustomerSchema } from "@/libs/zod";
-import { AppError } from "@/app-error";
-import { sign } from "@/libs/jwt";
+import { CustomerSchema } from "@/lib/schemas";
+import { AppError } from "@/http/app-error";
+import { sign } from "@/lib/jwt";
 
 export class CreateCustomerUseCase {
   constructor(

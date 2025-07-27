@@ -6,6 +6,6 @@ const sequelizeCustomersRepository = new PrismaCustomersRepository();
 
 const authenticateCustomerUseCase = new AuthenticateCustomerUseCase(sequelizeCustomersRepository);
 
-const authenticateUserController = new AuthenticateCustomerController(authenticateCustomerUseCase);
+const authenticateCustomerController = new AuthenticateCustomerController(authenticateCustomerUseCase);
 
-export { authenticateUserController };
+export { authenticateCustomerController };

@@ -1,6 +1,6 @@
 import { Customer } from "@/entities/Customer";
 import { ICustomersRepository } from "../ICustomersRepository";
-import { prisma } from "./prisma";
+import { prisma } from "@/lib/prisma";
 
 export class PrismaCustomersRepository implements ICustomersRepository {
   async findByEmail(email: string): Promise<Customer | undefined> {

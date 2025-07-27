@@ -1,8 +1,8 @@
 import { ITablesRepository } from "@/repositories/ITablesRepository";
 import { ICreateTableRequestDTO } from "./CreateTableDTO";
 import { Table } from "@/entities/Table";
-import { TableSchema } from "@/libs/zod";
-import { AppError } from "@/app-error";
+import { TableSchema } from "@/lib/schemas";
+import { AppError } from "@/http/app-error";
 
 export class CreateTableUseCase {
   constructor(

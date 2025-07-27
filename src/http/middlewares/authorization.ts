@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { decrypt } from "@/libs/jwt";
+import { decrypt } from "@/lib/jwt";
 
 export async function authorization(
   request: Request,

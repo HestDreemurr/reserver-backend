@@ -5,4 +5,5 @@ export interface ITablesRepository {
   list(): Promise<Table[]>;
   update(id: string, changes: Partial<Table>): Promise<void>;
   findById(id: string): Promise<Table>;
+  delete(id: string): Promise<void>;
 }

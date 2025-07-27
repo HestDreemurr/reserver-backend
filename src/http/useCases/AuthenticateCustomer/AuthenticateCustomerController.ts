@@ -1,6 +1,5 @@
 import { AuthenticateCustomerUseCase } from "./AuthenticateCustomerUseCase";
 import { Request, Response } from "express";
-import { AuthCustomerSchema } from "@/libs/zod";
 
 export class AuthenticateCustomerController {
   constructor(
