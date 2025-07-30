@@ -5,6 +5,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  
 }
 
 model Customer {
@@ -12,7 +13,9 @@ model Customer {
   name String
   email String @unique
   password String
-  role String @default("customer")
+  role Role @default(CUSTOMER)
+  
+  reserves Reserve[]
   
   @@map("customers")
 }
@@ -21,7 +24,40 @@ model Table {
   id String @id @default(uuid())
   name String
   capacity Int
-  status String @default("available")
+  status TableStatus @default(AVAILABLE)
+  
+  reserves Reserve[]
   
   @@map("tables")
+}
+
+model Reserve {
+  id String @id @default(uuid())
+  
+  customer Customer @relation(fields: [customerId], references: [id])
+  customerId String
+  
+  table Table @relation(fields: [tableId], references: [id])
+  tableId String
+  
+  date DateTime
+  status ReserveStatus @default(ACTIVE)
+  
+  @@map("reserves")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum TableStatus {
+  AVAILABLE
+  RESERVED
+  INACTIVE
+}
+
+enum ReserveStatus {
+  ACTIVE
+  CANCELED
 }

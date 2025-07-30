@@ -29,5 +29,15 @@ export const TableSchema = z.object({
 }, requiredBodyError);
 
 export const UpdateTableSchema = TableSchema.extend({
-  status: z.literal(["available", "reserved", "inactive"], "Invalid table status.")
+  status: z.literal(["AVAILABLE", "RESERVED", "INACTIVE"], "Invalid table status.")
 }).partial();
+
+export const ReserveSchema = z.object({
+  customerId: z.string()
+    .uuid("Invalid customer ID."),
+    
+  tableId: z.string()
+    .uuid("Invalid table ID."),
+  
+  date: z.iso.datetime({ local: true, error: "Invalid date." })
+});

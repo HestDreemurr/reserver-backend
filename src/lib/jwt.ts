@@ -5,7 +5,7 @@ const secretKey = process.env.JWT_SECRET_KEY;
 
 export function sign(body: {
   id: string,
-  role: "customer" | "admin"
+  role: "CUSTOMER" | "ADMIN"
 }) {
   const token = jwt.sign(body, secretKey, { expiresIn: "7d" });
   return token;

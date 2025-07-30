@@ -9,7 +9,7 @@ describe("Update Table", async () => {
   const table = new Table({
     name: "Jacy",
     capacity: 9,
-    status: "available"
+    status: "AVAILABLE"
   });
   
   await inMemoryTablesRepository.save(table);
@@ -19,7 +19,7 @@ describe("Update Table", async () => {
   test("successfully update a table", async () => {
     await expect(updateTableUseCase.execute({
       id: table.id,
-      changes: { status: "available" }
+      changes: { status: "AVAILABLE" }
     })).resolves.toBeUndefined();
   });
   

@@ -10,7 +10,7 @@ describe("Create Table", () => {
     await expect(createTableUseCase.execute({
       name: "41",
       capacity: 3,
-      status: "available"
+      status: "AVAILABLE"
     })).resolves.toBeUndefined();
   });
   
@@ -24,13 +24,13 @@ describe("Create Table", () => {
     await expect(createTableUseCase.execute({
       name: "41",
       capacity: 0,
-      status: "available"
+      status: "AVAILABLE"
     })).rejects.toThrow("The capacity must be a number between 1 and 10.");
     
     await expect(createTableUseCase.execute({
       name: "41",
       capacity: 11,
-      status: "available"
+      status: "AVAILABLE"
     })).rejects.toThrow("The capacity must be a number between 1 and 10.");
   });
 });
