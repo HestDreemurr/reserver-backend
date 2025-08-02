@@ -6,7 +6,7 @@ describe("Reserve entity", () => {
     const reserve = new Reserve({
       customerId: "ajajajajja",
       tableId: "@&@&@;@",
-      date: "2025-07-29T15:00"
+      date: "2025-10-10T15:00"
     });
     
     expect(reserve).toBeDefined();
@@ -16,7 +16,7 @@ describe("Reserve entity", () => {
     expect(() => new Reserve({
       customerId: "ajajajajja",
       tableId: "@&@&@;@",
-      date: "2021-07-20T15:00"
+      date: "2021-10-10T15:00"
     })).toThrow("Invalid date.");
   });
 });

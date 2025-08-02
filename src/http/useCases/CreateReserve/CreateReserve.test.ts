@@ -34,13 +34,13 @@ describe("Create Reserve", async () => {
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: table.id,
-      date: "2025-07-29T20:00"
+      date: "2025-10-10T20:00"
     })).resolves.toBeUndefined();
     
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: table.id,
-      date: "2025-07-29T22:00"
+      date: "2025-10-10T22:00"
     })).resolves.toBeUndefined();
   });
   
@@ -48,13 +48,13 @@ describe("Create Reserve", async () => {
     await expect(createReserveUseCase.execute({
       customerId: "auahaa-ksksjw",
       tableId: table.id,
-      date: "2025-07-29T20:00"
+      date: "2025-10-10T20:00"
     })).rejects.toThrow("Invalid customer ID.");
     
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: "ahq7ababy",
-      date: "2025-07-29T20:00"
+      date: "2025-10-10T20:00"
     })).rejects.toThrow("Invalid table ID.");
     
     await expect(createReserveUseCase.execute({
@@ -68,7 +68,7 @@ describe("Create Reserve", async () => {
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: randomUUID(),
-      date: "2025-07-29T20:00"
+      date: "2025-10-10T20:00"
     })).rejects.toThrow("The table don't exists.");
   });
   
@@ -76,13 +76,13 @@ describe("Create Reserve", async () => {
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: table.id,
-      date: "2025-07-29T20:00"
-    })).rejects.toThrow("There's an overlapping reserve.");
+      date: "2025-10-10T20:00"
+    })).rejects.toThrow("There's an overlapping reserve on this table.");
     
     await expect(createReserveUseCase.execute({
       customerId: customer.id,
       tableId: table.id,
-      date: "2025-07-29T20:30"
-    })).rejects.toThrow("There's an overlapping reserve.");
+      date: "2025-10-10T20:30"
+    })).rejects.toThrow("There's an overlapping reserve on this table.");
   });
 });

@@ -10,6 +10,8 @@ import { listTablesController } from "./useCases/ListTables";
 import { updateTableController } from "./useCases/UpdateTable";
 import { deleteTableController } from "./useCases/DeleteTable";
 import { createReserveController } from "./useCases/CreateReserve";
+import { listReservesController } from "./useCases/ListReserves";
+import { cancelReserveController } from "./useCases/CancelReserve";
 
 const router = Router();
 
@@ -27,5 +29,9 @@ router.patch("/tables/:id", authorization, adminRole, (request, response) => upd
 router.delete("/tables/:id", authorization, adminRole, (request, response) => deleteTableController.handle(request, response))
 
 router.post("/reserves", authorization, (request, response) => createReserveController.handle(request, response));
+
+router.get("/reserves", authorization, (request, response) => listReservesController.handle(request, response));
+
+router.patch("/reserves/:id/cancel", authorization, (request, response) => cancelReserveController.handle(request, response));
 
 export { router };
